@@ -1,0 +1,48 @@
+
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+ 
+    <%= f.hidden_field :aluno_id, :value=>current_user.id %>
+    <%= f.hidden_field :status, :value=>0 %>
+  </div>
+  <div class="field">
+  	<%= f.label :orientador %><br />
+    <%= retorna_nome(@project.orientador_id) %>
+    
+
+  </div>
+  
+    <div class="field">
+    <%= f.label :disciplina %><br />
+    <%= @project.course%>
+
+  </div>
+  <div class="field">
+    <%= f.label :título %><br />
+    <%= @project.title%>
+  </div>
+  <div class="field">
+    <%= f.label :descrição %><br />
+    <%= @project.description%>
+  </div>
+
+
+  <div class="actions">
+    <%= link_to "Confirmar", projects_path%> </td>|<td><%= link_to ' Cancelar', @project, method: :delete, data: { confirm: 'voce tem certeza que deseja cancelar?' } %>
+  
+  </div>
+  
+
+<% end %>

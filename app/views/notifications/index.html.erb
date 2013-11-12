@@ -1,0 +1,50 @@
+
+                <h1>Avisos</h1>
+                
+                
+		<% @notifications.each do |notification| %>
+  
+  
+  
+ 			
+                    
+  
+  
+  			<h3><%= notification.title%></h3>
+ 			 <%= notification.details %>
+  			</br><span>postado por  <%= notification.author %> em <%= notification.date.to_s_br %> </span>
+  
+    
+    
+    
+    		<% if user_signed_in? && current_user.role == "Coordenador" %> 
+    
+    			<%-#= link_to 'Exibir', notification %>
+    			<%= link_to 'Editar', edit_notification_path(notification) %>
+    			<%= link_to 'Excluir', notification, method: :delete, data: { confirm: 'Voce tem certeza?' } %>
+    
+   
+   
+   			 <% end %>
+  
+  		</br></br>
+		<% end %>
+
+
+
+
+ 			<% if user_signed_in? && current_user.role == "Coordenador" %> 
+    
+    			<%= link_to 'Novo aviso', new_notification_path %>
+    
+   			<% end %>
+
+
+               
+                
+                
+                
+                        
+                    
+              
+

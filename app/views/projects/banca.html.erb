@@ -1,0 +1,37 @@
+<h1>Definir Banca</h1>
+<p>Selecione um dos projetos abaixo para definir a banca:</p>
+
+<table>
+  <tr>
+  	
+    <th>Titulo</th>
+    <th>Aluno</th>
+    <th>Disciplina</th> 
+
+  </tr>
+
+
+<% @projects.each do |project| %>
+
+   <%= form_for(project) do |f| %>
+   
+   <%if project.status == 3 %>
+  <tr>
+  	
+  	
+    
+   
+    <td><%=  link_to project.title, project %></td>
+    <td><%= retorna_nome(project.aluno_id) %></td>
+    <td><%= project.course %></td>
+ 	<td><%=  link_to "Definir Banca", url_for(:controller => "projects", :action => "editbanca", :id=> project.id) %></td>
+   
+  </tr>
+  <%end%>
+	
+	<% end %>
+<% end %>
+</table>
+
+<br />
+

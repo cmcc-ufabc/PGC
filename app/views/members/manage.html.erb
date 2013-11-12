@@ -1,0 +1,46 @@
+
+<h1>Membros do Projeto</h1>
+
+<% if !@project.group_confirm%>
+<p style = "color: red">Adicione os membros do seu grupo de projeto e então clique em "Confirmar Membros do Projeto", após confirmação não será possivel editar novamente<p>
+<% else%>
+<p style = "color: red">Voce ja confirmou os membros do projeto, aguarde todos os membros confirmarem o e-mail para prosseguir.<p>
+
+<%end%>
+
+
+
+<br />
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Email</th>
+    <th>Confirmação</th>
+    <th></th>
+
+  </tr>
+
+<% @members.each do |member| %>
+  <tr>
+    <td><%= member.name %></td>
+    <td><%= member.email %></td>
+    <td><% if member.confirmed %>
+		<%= "confirmado" %>
+		<% else %>
+			<%= "ainda não confirmado" %>
+		<% end %>
+	</td>
+    	<% if !@project.group_confirm%>
+    		<td><%= link_to 'Apagar', member_path(member), method: :delete,  confirm: 'Voce tem certeza que deseja apagar esse membro?' %></td>
+    	<%end%>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+ 
+<% if !@project.group_confirm%>
+	<%= link_to 'Adicionar Membro', new_member_path( :project_id => @project.id) %> | <%= link_to 'Confirmar Membros do Projeto', salvar_member_path( ) %>
+<%end%>
+<br /><%= flash[:notice]%>

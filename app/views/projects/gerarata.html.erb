@@ -1,0 +1,40 @@
+<h1>Gerar Ata Final</h1>
+<p>Projetos disponiveis:</p>
+
+<table>
+  <tr>
+    <th>Aluno</th>
+    <th>Titulo</th>
+    <th>Descrição</th>
+    <th>Disciplina</th>
+
+  </tr>
+
+
+<% @projects.each do |project| %>
+
+   <%= form_for(project) do |f| %>
+   
+   <%if project.status == 4%>
+   
+   
+   
+  <tr>
+    <td><%= retorna_nome(project.aluno_id) %></td>
+    <td><%= project.title %></td>
+    <td><%= project.description %></td>
+    <td><%= project.course %></td>
+  
+	
+    <td><%=link_to "Gerar Ata", :controller => "board_documents", :action => "edit", :id => retorna_bd_do_projeto(project.id)%></td>
+    
+  </tr>
+  <%end%>
+	
+	<% end %>
+<% end %>
+</table>
+
+<br />
+
+

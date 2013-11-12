@@ -1,0 +1,14 @@
+#encoding:utf-8
+<p>Olá <%= @user.name %>,</p>
+
+<p>Seu projeto foi recusado pelo(a) 
+	<%if @project.status==-1%>
+	orientador(a) <%= @orientador%>																														
+	<%elsif @project.status==-2%>
+	coordenador(a) do pgc
+	<%end%>
+</p>
+
+<p> caso queira enviar um novo projeto, basta acessar o sistema.</p>
+
+<p>para acessar o sistema,  <a href="http://cmcc-bcc.ufabc.edu.br/pgc"> clique aqui </a></p>

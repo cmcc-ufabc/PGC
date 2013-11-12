@@ -1,0 +1,81 @@
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+ 
+    <%= f.hidden_field :aluno_id, :value=>current_user.id %>
+     <%= f.hidden_field :duedate_id, :value=>@periodo.id %>
+    <%= f.hidden_field :status, :value=>0 %>
+    <%= f.hidden_field :observation, :value=>"" %>
+    
+  </div>
+  <div class="field">
+  	<%= f.label :orientador %><br />
+    <%= f.select :orientador_id, @orientadores.collect{|m| [m.name, m.id]}%> 
+
+  </div>
+  
+    <div class="field">
+    <%= f.label :disciplina %><br />
+    <%= f.select :course, coursearray(current_user.id) %>
+
+  </div>
+  <div class="field">
+    <%= f.label :título %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :descrição %><br />
+    <%= f.text_area :description %>
+  </div>
+
+
+  <div class="field">
+    
+    <%= f.check_box :groupstate,  {:onChange => "hello()"} %> Projeto em grupo.
+  </div>
+  
+  
+  <div id="botao_enviar">
+
+  </div>
+  
+  	
+
+  <script type="application/javascript">
+        // Mesmo script escrito embutido no documento html
+        
+        var selection = document.getElementById("project_groupstate");
+        var stat = document.getElementById("project_status");
+        function hello() {
+          
+          
+          if (selection.checked){
+          	      	
+          	document.getElementById("botao_enviar").innerHTML = "<div  class='actions'><input name='commit' type='submit' value='Definir grupo' /></div>"
+        
+          	stat.value = -3;
+        
+          
+          }else{
+          	
+          	document.getElementById("botao_enviar").innerHTML = "<div  class='actions'><input name='commit' type='submit' value='Enviar Pedido de Orientação' /></div>"
+          	stat.value = 0;
+          }
+          
+        }
+       hello();
+  </script>
+  
+
+<% end %>

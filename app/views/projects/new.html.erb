@@ -1,0 +1,16 @@
+
+<% if @periodo != nil%>
+	<%if current_user.role == "Aluno" %>
+		<h1>Pedido de Orientação</h1>
+
+		<%= @periodo.trimestre %>
+		
+		<%= render 'form' %>
+
+		<%= link_to 'Voltar', notifications_path %>
+	<%end%>
+<%else%>
+
+	<h1>Fora do Periodo</h1>
+	
+<%end%>

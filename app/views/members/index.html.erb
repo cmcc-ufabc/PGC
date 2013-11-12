@@ -1,0 +1,25 @@
+<h1>Gerenciar Membros</h1>
+<h4>Escolha um dos projetos para gerenciar</h4>
+
+<table>
+  <tr>
+    <th>Titulo</th>
+    <th>Orientador</th>
+    <th>Disciplina</th>
+  </tr>
+
+<% @projects.each do |project| %>
+
+	<%if project.status == -3%>
+  		<tr>
+    		<td><%= link_to project.title, manage_member_path(project.id)%></td>
+    		<td><%= retorna_nome(project.orientador_id) %></td>
+    		<td><%= project.course %></td>
+  		</tr>
+	<% end %>
+<% end %>
+</table>
+
+<br />
+
+

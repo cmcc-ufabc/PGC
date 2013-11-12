@@ -1,0 +1,83 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Aluno 1:</b>
+  <%= retorna_nome(@project.aluno_id) %>
+</p>
+
+
+
+<%if @project.group_confirm%>
+
+<p>
+
+<% for contador in @grupos%>
+	<p><b>
+		Aluno <%= contador.id + 1%>:
+		</b>
+		<%= contador.name%>
+	</p>	
+<% end %> 
+  
+  
+
+
+<%end%>
+
+
+<p>
+  <b>Orientador:</b>
+  <%= retorna_nome(@project.orientador_id) %>
+</p>
+
+<p>
+  <b>Titulo:</b>
+  <%= @project.title %>
+</p>
+<p>
+  <b>Curso:</b>
+  <%= @project.course %>
+</p>
+<p>
+  <b>Status:</b>
+  <%= retorna_status(@project.status) %>
+</p>
+
+
+
+<p>
+  <b>Descrição:</b>
+  <p style="width: 60%; text-align: justify; "><%= @project.description %></p>
+</p>
+
+
+<%if @project.observation != ""%>
+<p>
+  <b>Observaçoes:</b>
+  <%= @project.observation %>
+</p>
+<%end%>
+
+<%if @project.status >3%>
+		<table>
+		<title>MEMBROS DA BANCA</title>
+		<b> Membros da Banca:</b>
+	
+		<th>Nome</th>
+		<th>Instituição</th>
+		<th>Tipo</th>
+	
+	<% @board_members.each do |membro| %>
+	
+
+			<tr>
+    			<td><b><%= membro.nome %></b></td>
+    			<td><%= membro.instituicao %></td>
+    			<td><%= membro.tipo %></td>    			 
+   			 </tr>
+   	
+	<% end%>
+		</table>
+<%end%>
+
+<%= link_to 'Voltar', :back %>

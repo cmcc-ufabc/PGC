@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Orientation start:</b>
+  <%= @duedate.orientation_start %>
+</p>
+
+<p>
+  <b>Orientation end:</b>
+  <%= @duedate.orientation_end %>
+</p>
+
+<p>
+  <b>Evaluation start:</b>
+  <%= @duedate.evaluation_start %>
+</p>
+
+<p>
+  <b>Evaluation end:</b>
+  <%= @duedate.evaluation_end %>
+</p>
+
+<p>
+  <b>Board start:</b>
+  <%= @duedate.board_start %>
+</p>
+
+<p>
+  <b>Board end:</b>
+  <%= @duedate.board_end %>
+</p>
+
+
+<%= link_to 'Edit', edit_duedate_path(@duedate) %> |
+<%= link_to 'Back', duedates_path %>

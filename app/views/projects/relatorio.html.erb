@@ -1,0 +1,39 @@
+<h1>Relatorio do Coordenador:</h1>
+
+
+<h4>Selecione um periodo para gerar o relatorio</h4>
+
+
+
+<table>
+
+<tr>
+	<th>Quadrimestre</th>
+	<th>Ano</th>
+	<th>Data de inicio</th>
+	<th>Finalizado</th>
+	
+</tr>
+<% @periodos.each do |periodo| %>
+
+	<tr>
+		
+		<td>
+			<%=link_to(periodo.trimestre, duedate_path(periodo, :format=>"pdf")) %>
+		</td>
+		<td>
+			<%=periodo.orientation_start.year %>
+		</td>
+		<td>
+			<%=periodo.orientation_start %>
+		</td>
+		<td>
+			<%=periodo.finalizado %>
+		</td>
+		
+	</tr>
+
+
+<%end%>
+
+</table>

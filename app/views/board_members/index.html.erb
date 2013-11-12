@@ -1,0 +1,29 @@
+<h1>Listing board_members</h1>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Email</th>
+    <th>Instituicao</th>
+    <th>Tipo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @board_members.each do |board_member| %>
+  <tr>
+    <td><%= board_member.nome %></td>
+    <td><%= board_member.email %></td>
+    <td><%= board_member.instituicao %></td>
+    <td><%= board_member.tipo %></td>
+    <td><%= link_to 'Show', board_member %></td>
+    <td><%= link_to 'Edit', edit_board_member_path(board_member) %></td>
+    <td><%= link_to 'Destroy', board_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Board member', new_board_member_path %>

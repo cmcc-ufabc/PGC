@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  orientation_start: 2012-09-13
+  orientation_end: 2012-09-13
+  evaluation_start: 2012-09-13
+  evaluation_end: 2012-09-13
+  board_start: 2012-09-13
+  board_end: 2012-09-13
+
+two:
+  orientation_start: 2012-09-13
+  orientation_end: 2012-09-13
+  evaluation_start: 2012-09-13
+  evaluation_end: 2012-09-13
+  board_start: 2012-09-13
+  board_end: 2012-09-13

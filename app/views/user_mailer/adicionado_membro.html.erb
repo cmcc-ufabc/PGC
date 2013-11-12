@@ -1,0 +1,18 @@
+#encoding:utf-8
+<p>Olá <%= @member.name %>,</p>
+
+<p>Voce voce foi adicionado por <%= @sender %> como membro do projeto <%= @project.title %></p>
+<br />
+<p>Confira os dados e clique no link abaixo para confirmar</p>
+<p>nome: <%= @member.name %></p>
+<p>e-mail: <%= @member.email %></p>
+<p>token: <%= @member.token %></p>
+<p>Título do projeto: <%= @project.title %></p>
+<p>Orientador do projeto: <%= @orientador %></p>
+<p>Disciplina <%@project.course %></p>
+<p>Descrição do projeto: <%= @project.description %></p>
+
+
+
+<%= link_to "Confirmar", confirma_member_url(@member, :token => @member.token)%>
+

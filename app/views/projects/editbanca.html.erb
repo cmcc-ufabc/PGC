@@ -1,0 +1,57 @@
+
+<h1>Composição Da Banca</h1>
+
+<%= form_for(@project) do |f| %>
+
+
+	<p>Nome do Aluno:<%= aluno_projeto(@project.id)%></p>
+	
+	<p>Nome do Orientador: <%= orientador_projeto(@project.id)%></p>
+
+	<p>Título do Projeto: <%= @project.title%></p>
+	
+	<p>Data da Defesa : <%= f.date_select :board_date%> <%= %></p>
+	<p>Horario da Defesa : <%= f.time_select :boad_time%> <%= %></p>
+	<p>Local da Defesa : <%= f.text_field :board_location, :value=>"Universidade Federal do ABC"%> <%= %></p>
+
+	
+	<p><%= f.check_box :boad_invitation%> <%= %> Enviar e-mail de convite para os membros da banca</p>
+	<br/>
+	<table>
+		<title>MEMBROS DA BANCA</title>
+		Membros da Banca
+	
+	<th>Nome</th>
+	<th>Instituição</th>
+	<th>Tipo</th>
+	<th></th>
+	<th></th>
+
+
+			<% @board_members.each do |membro| %>
+			
+			<tr>
+    			<td><b><%= membro.nome %></b></td>
+    			<td><%= membro.instituicao %></td>
+    			<td><%= membro.tipo %></td>
+    			
+    			<%if membro.tipo != "Presidente da Banca"%>
+        		<td><%= link_to 'Editar', edit_board_member_path(membro, :project_id => @project.id) %></td>
+    			<td><%= link_to 'Excluir', membro, method: :delete, data: { confirm: 'Voce tem certeza que deseja excluir?' } %></td>
+    			<%end%>
+   			 </tr>
+	   		<% end%>
+	    
+    
+	<tr>
+    	<td><%=  link_to "Adicionar novo membro à banca", new_board_member_path(:project_id => @project.id)%></td>
+    </tr>
+    
+  
+	</table>
+	
+	 <%= f.hidden_field :status, :value=> 4%> <%= %>
+  <div class="actions">
+    <%= f.submit "Definir Banca"%>
+  </div>
+<% end %>

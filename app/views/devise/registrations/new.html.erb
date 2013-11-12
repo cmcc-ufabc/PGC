@@ -1,0 +1,69 @@
+<h2>Cadastrar</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+
+  <div><%= f.label :nome_completo%><br />
+  <%= f.text_field :name %></div>
+  
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :Senha %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :Repita_Senha %><br />
+  <%= f.password_field :password_confirmation %></div>
+  
+  
+ 
+  <div><%= f.label :tipo_de_usuário%><br />
+  <%= f.select :role, [["Aluno"], ["Orientador"]], {}, {:onChange => "hello()"}%></div>
+  
+  
+
+        
+<div id="orientador_div">
+
+<div><%= f.label :Instituição%><br />
+  <%= f.text_field :location, :value => "Universidade Federal do ABC (UFABC)" %></div>
+  <br />
+</div>
+
+<div id="aluno_div">
+
+<div><%= f.label :RA%><br />
+  <%= f.text_field :ra %></div>
+  <br />
+</div>
+
+  <div><%= f.submit "Efetuar Cadastro" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+  <script type="application/javascript">
+        // Mesmo script escrito embutido no documento html
+        
+        var selection = document.getElementById("user_role");
+        function hello() {
+          
+          
+          if (selection.options[selection.selectedIndex].value == "Orientador"){
+          	      	
+          	document.getElementById("orientador_div").style.display = "block";
+          	document.getElementById("aluno_div").style.display = "none";
+          	
+          }else{
+          	
+          	document.getElementById("orientador_div").style.display = "none";
+          	document.getElementById("aluno_div").style.display = "block";
+          }
+          
+        }
+       hello();
+  </script>
+  
+</br>
+<font color="red">Atenção: O e-mail utilizado deve ser @ufabc.edu.br ou @aluno.ufabc.edu.br</font>

@@ -1,0 +1,20 @@
+<h1>Selecione o Arquivo</h1>
+
+
+<%= form_for(@board_document) do |f| %>
+
+
+
+  <div class="field">
+    <%= f.label :arquivo %><br />
+    <%= f.file_field :atadigital %>
+   
+  </div>
+  
+  <div class="actions">
+    <%= f.submit "enviar"%>
+  </div>
+<% end %>
+
+
+<%= link_to 'Voltar', gerarata_path %>

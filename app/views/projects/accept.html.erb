@@ -1,0 +1,49 @@
+<h1>Analisar Pedidos de Orientação</h1>
+
+<table>
+  <tr>
+    <th>Aluno</th>
+    <th>Orientador</th>
+    <th>Titulo</th>
+    <th>Disciplina</th>
+    <th>Parecer</th>
+    <th>Observações</th>
+    <th></th>
+ 
+  </tr>
+
+
+
+
+<% @projects.each do |project| %>
+
+  <%= form_for(project) do |f| %>
+  
+  <tr>
+    <td><%= retorna_nome(project.aluno_id) %></td>
+    <td><%= retorna_nome(project.orientador_id) %></td>
+    <td><%=  link_to project.title, project %></td>
+    <td><%= project.course %></td>
+    
+    
+    <% if current_user.role == "Orientador"%>
+    <td><%= select( "project", "status", { "Aprovado" => "1", "Reprovado" => "-1"}) %></td>
+   <%else%>
+   <td><%= select( "project", "status", { "Aprovado" => "2", "Reprovado" => "-2"}) %></td>
+   <%end%>
+   			
+    
+    <td> <%= f.text_field :observation %></div></td>
+    
+    <td><%= button_to 'Confirmar' %></td>
+   
+
+  </tr>
+  
+	<% end %>
+<% end %>
+</table>
+
+<br />
+
+

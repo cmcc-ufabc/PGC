@@ -1,0 +1,88 @@
+<%= form_for(@evaluation) do |f| %>
+  <% if @evaluation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@evaluation.errors.count, "error") %> prohibited this evaluation from being saved:</h2>
+
+      <ul>
+      <% @evaluation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="field">
+    <%= f.hidden_field :project_id %>
+  </div>
+  
+  
+  <p>Assinale as questões a seguir de acordo com a avaliação realizada. É fundamental o
+preenchimento de todos os campos. Caso necessário, faça observações ao final.</p>
+  
+  
+  <table>
+  <tr>
+  	<th/>
+  <tr/>
+  
+  <tr>
+  <div class="field"><b>
+    1) Contato Presencial: A quantidade e a duração das reuniões presenciais foram
+satisfatórias?<br /></b>
+    <%= f.radio_button :answer1, "sim" %> Sim   <%= f.radio_button :answer1, "parcialmente" %>Parcialmente  <%= f.radio_button :answer1, "não" %> Não
+
+  </div>
+  </tr>
+  <tr>
+  <div class="field"><b>
+    2) Contato Virtual: O orientando manteve satisfatoriamente contato virtual com
+orientador através de mensagens eletrônicas (e-mails, trocas de documentos, etc) ?<br /></b>
+     <%= f.radio_button :answer2, "sim" %> Sim   <%= f.radio_button :answer2, "parcialmente" %>Parcialmente  <%= f.radio_button :answer2, "não" %> Não
+
+  </div>
+  </tr>
+  <tr>
+  <div class="field"><b>
+    3) Assiduidade: O orientando compareceu às reuniões de orientação agendadas e
+respondeu a mensagens (e-mail) ?<br /></b>
+    <%= f.radio_button :answer3, "sim" %> Sim   <%= f.radio_button :answer3, "parcialmente" %>Parcialmente  <%= f.radio_button :answer3, "não" %> Não
+
+  </div>
+  
+  </tr>
+  <tr>
+  <div class="field"><b>
+    4) Qualidade: O orientando realizou as atividades previstas relacionadas ao projeto ?<br /></b>
+     <%= f.radio_button :answer4, "sim" %> Sim   <%= f.radio_button :answer4, "parcialmente" %>Parcialmente  <%= f.radio_button :answer4, "não" %> Não
+
+  </div>
+  </tr>
+  <tr>
+  <div class="field"><b>
+    5) Cronograma: O cronograma de atividades previsto foi seguido?<br /></b>
+     <%= f.radio_button :answer5, "sim" %> Sim   <%= f.radio_button :answer5, "parcialmente" %>Parcialmente  <%= f.radio_button :answer5, "não" %> Não
+
+  </div>
+  </tr>
+  <tr>
+  <div class="field"><b>
+    6) Avaliação Geral: Assinale um dos itens abaixo quanto à qualidade geral do processo
+de orientação no período.<br /></b>
+   
+     <%= f.radio_button :answer6, "Excelente" %> Excelente  <%= f.radio_button :answer6, "Muito boa" %>Muito boa  <%= f.radio_button :answer6, "Muito boa, com algumas deficiências facilmente sanáveis." %> Muito boa, com algumas deficiências facilmente sanáveis. <%= f.radio_button :answer6, "Boa" %>Boa  <%= f.radio_button :answer6, "Boa, com deficiências." %>Boa, com deficiências. <%= f.radio_button :answer6, "Regular" %> Regular <%= f.radio_button :answer6, "Com sérias deficiências." %> Com sérias deficiências.
+
+  </div>
+  </tr>
+  <tr>
+  <div class="field">
+    <b>7) Observações e Recomendações<br /></b>
+    <%= f.text_area :answer7 %>
+  </div>
+  </tr>
+  <tr>
+  <div class="actions">
+    <%= f.submit "Enviar Avaliação"%>
+  </div>
+  </tr>
+  </table>
+<% end %>

@@ -1,0 +1,54 @@
+<h1>Avaliação do aluno   </h1>
+
+<h3><%= retorna_aluno_por_avalicao(@evaluation.project_id) %></h3>
+<p id="notice"><%= notice %></p>
+
+
+
+<p>
+  <b>1) Contato Presencial: A quantidade e a duração das reuniões presenciais foram
+satisfatórias?</b>
+  <br/><%= @evaluation.answer1 %><br/><br/>
+</p>
+
+<p>
+  <b>2) Contato Virtual: O orientando manteve satisfatoriamente contato virtual com
+orientador através de mensagens eletrônicas (e-mails, trocas de documentos, etc) ?</b>
+  <br/><%= @evaluation.answer2 %><br/><br/>
+</p>
+
+<p>
+  <b>3) Assiduidade: O orientando compareceu às reuniões de orientação agendadas e
+respondeu a mensagens (e-mail) ?</b>
+ <br/> <%= @evaluation.answer3 %><br/><br/>
+</p>
+
+<p>
+  <b>4) Qualidade: O orientando realizou as atividades previstas relacionadas ao projeto ?</b>
+ <br/> <%= @evaluation.answer4 %><br/><br/>
+</p>
+
+<p>
+  <b>5) Cronograma: O cronograma de atividades previsto foi seguido?</b>
+  <br/><%= @evaluation.answer5 %><br/><br/>
+</p>
+
+<p>
+  <b>6) Avaliação Geral: Assinale um dos itens abaixo quanto à qualidade geral do processo
+de orientação no período.</b>
+ <br/> <%= @evaluation.answer6 %><br/><br/>
+</p>
+
+<p>
+  <b>7) Observações e Recomendações</b>
+  <br/><%= @evaluation.answer7 %><br/><br/>
+</p>
+
+
+<% if current_user.role == "Orientadorteste" %>
+	<%= link_to 'Editar', edit_evaluation_path(@evaluation) %> |
+<%end%>
+
+
+<%= link_to 'Voltar', projects_path %>|
+<%= link_to "Gerar PDF", evaluation_path(@evaluation, :format => 'pdf') %>

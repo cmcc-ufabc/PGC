@@ -1,0 +1,40 @@
+<%= form_for(@board_member) do |f| %>
+  <% if @board_member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@board_member.errors.count, "error") %> prohibited this board_member from being saved:</h2>
+
+      <ul>
+      <% @board_member.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :instituição %><br />
+    <%= f.text_field :instituicao, :value=>"Universidade Federal do ABC (UFABC)", :size => 50 %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo %><br />
+    <%= f.select :tipo,  ["Titular","Suplente"] %>
+  </div>
+   <div class="field">
+
+    <%= f.hidden_field :project_id, :value=>@projeto %>
+    </div>
+  <div class="actions">
+    <%= f.submit "Adicionar"%>
+  </div>
+  
+  
+
+<% end %>

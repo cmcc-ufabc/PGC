@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalhes:</b>
+  <%= @notification.details %>
+</p>
+
+<p>
+  <b>Autor:</b>
+  <%= @notification.author %>
+</p>
+
+<p>
+  <b>Data:</b>
+  <%= @notification.date %>
+</p>
+
+
+<%= link_to 'Editar', edit_notification_path(@notification) %> |
+<%= link_to 'Voltar', notifications_path %>

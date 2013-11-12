@@ -1,0 +1,39 @@
+<h1>Enviar relatório final aprovado pela banca.</h1>
+<p>Projetos disponiveis:</p>
+
+<table>
+  <tr>
+
+    <th>Titulo</th>
+    <th>Descrição</th>
+    <th>Disciplina</th>
+	<th>Arquivo do relatório final</th>
+	<th></th>
+	<th></th>
+  </tr>
+
+
+<% @projects.each do |project| %>
+
+   <%= form_for(project)  do |f| %>
+   
+   <%if project.status == 5 %>
+  <tr>
+   
+    <td><%= project.title %></td>
+    <td><%= project.description %></td>
+    <td><%= project.course %></td>
+    <td><%= f.file_field :file %></td>
+	
+      <td><%= f.submit "Atualizar Arquivo" %></td>
+    
+  </tr>
+  <%end%>
+	
+	<% end %>
+<% end %>
+</table>
+
+<br />
+
+

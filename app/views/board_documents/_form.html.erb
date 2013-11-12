@@ -1,0 +1,90 @@
+<%= form_for(@board_document) do |f| %>
+  <% if @board_document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@board_document.errors.count, "error") %> prohibited this board_document from being saved:</h2>
+
+      <ul>
+      <% @board_document.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+   
+    <%= f.hidden_field :project_id %>
+  </div>
+ 
+    <div class="field">
+    <%= f.label :local_da_defesa %><br />
+    <%= f.text_field :location, :value =>"Sala 302 (Bloco B)" %>
+  </div>
+  <div class="field">
+    <%= f.label :Universidade %><br />
+    <%= f.text_field :location2, :value =>@universidade %>
+  </div>
+  <div class="field">
+    <%= f.label :Cidade %><br />
+    <%= f.text_field :city, :value =>"Santo André" %>
+  </div>
+  
+    <div class="field">
+
+    <%= f.date_select :date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :horário %><br />
+    <%= f.time_select  :time , :default => @project.boad_time%>
+  </div>
+  
+   <div class="field">
+    <%= f.label :aprovação %><br />
+    <%= f.select :approval, [["Aprovado", "Aprovado com conceito "], ["Aprovado com revisões", "Aprovado, sob a condição de apresentação de revisões sugeridas pela banca, recebendo o conceito"],
+    ["Reprovado", "Reprovado, recebendo o conceito"],["_________","__________________________________________________ , recebendo o conceito"]]  %>
+   
+  </div>
+  <div class="field">
+    <%= f.label :conceito %><br />
+    <%= f.select :mark, ["A", "B", "C", "D", "F", "___"] %>
+   
+  </div>
+
+  <div class="field">
+    <%= f.label :tipo_de_ata, {:onMouseOver => "show(this)", :onMouseLeave => "messageBox.style.display='none'"} %><br />
+    <%= f.select :tipo , ["Automática", "Manual"] %>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script type="application/javascript">
+        // Mesmo script escrito embutido no documento html
+
+        function show(obj){
+messageBox.style.top=obj.offsetTop - 10 + 'px'
+messageBox.style.left=obj.offsetLeft+obj.offsetWidth+ 5 + 'px'
+contents.innerHTML="<b> Ata automática</b> - Sistema na qual sao geradas atas automaticamente, um e-mail é enviado para cada membro da banca e todos eles devem confirmar as informaçoes nesse e-mail para prosseguir com o projeto." +
+"<br/>"+"<b> Ata manual</b> - Sistema ao qual a ata é impressa e entao é realizada a assinatura manuscrita de todos os membros, posteriormente o coordenador fica responsavel pela digitalizaçao dessa ata."
+messageBox.style.display="block"
+}
+
+   
+  </script>
+  
+  <div id="messageBox" onmouseleave="messageBox.style.display='none'">
+	
+<div id="contents"></div>
+</div>
+
+
+  <div class="actions">
+    <%= f.submit "Avançar"%>
+  </div>
+<% end %>

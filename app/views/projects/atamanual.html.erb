@@ -1,0 +1,37 @@
+<h1>Enviar Ata Digitalizada</h1>
+<p>Selecione o projeto ao qual deseja enviar ata</p>
+
+<table>
+  <tr>
+    <th>Aluno</th>
+    <th>Titulo</th>
+    <th>Disciplina</th>
+	<th></th>
+  </tr>
+
+
+
+
+<% @projects.each do |project| %>
+
+  
+  <tr>
+    <td><%= retorna_nome(project.aluno_id) %></td>
+    <td><%=  link_to project.title, project %></td>
+    <td><%= project.course %></td>
+    
+
+   
+    <td><%= link_to "Enviar ata", enviaata_board_document_path(:id => id_do_board(project.id))%></td>
+    	
+   
+    
+  </tr>
+  
+
+<% end %>
+</table>
+
+<br />
+
+

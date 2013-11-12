@@ -1,0 +1,47 @@
+<%= form_for(@duedate) do |f| %>
+  <% if @duedate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@duedate.errors.count, "error") %> prohibited this duedate from being saved:</h2>
+
+      <ul>
+      <% @duedate.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<%= f.select :trimestre, [["1º Quadrimestre"], ["2º Quadrimestre"], ["3º Quadrimestre"]]%>
+
+
+  <div class="field">
+    <%= f.label :Inicio_Pedido_de_Orientatação %><br />
+    <%= f.date_select :orientation_start %>
+  </div>
+  <div class="field">
+    <%= f.label :Fim_Pedido_de_Orientatação %><br />
+    <%= f.date_select :orientation_end %>
+  </div>
+  <div class="field">
+    <%= f.label :Inicio_Avaliação_Coordenador_Aluno %><br />
+    <%= f.date_select :evaluation_start %>
+  </div>
+  <div class="field">
+    <%= f.label :Fim_Avaliação_Coordenador_Aluno %><br />
+    <%= f.date_select :evaluation_end %>
+  </div>
+  <div class="field">
+    <%= f.label :Inicio_Defesa_da_Banca  %><br />
+    <%= f.date_select :board_start %>
+  </div>
+  <div class="field">
+    <%= f.label :Fim_Defesa_da_Banca %><br />
+    <%= f.date_select :board_end %>
+  </div>
+   
+   
+  <div class="actions">
+    <%= f.submit "Criar Periodo" %>
+  </div>
+<% end %>

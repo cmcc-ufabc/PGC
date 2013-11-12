@@ -1,0 +1,14 @@
+
+<p> Selecione os participantes </p>
+<% @board_members.each do |board_member| %>
+
+
+<%= form_for (board_member) do |f| %>
+
+<div class="field">
+ 
+    <%= f.check_box :selected %>
+    <%= f.label board_member.nome%>
+  </div>
+<%end%>
+<%end%>

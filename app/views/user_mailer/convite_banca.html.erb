@@ -1,0 +1,16 @@
+#encoding:utf-8
+<p>Olá <%= @member.nome %>,</p>
+
+
+<br />
+<p>Voce foi convidado a participar como membro da banca de defesa do projeto <%= @project.title %>, do aluno <%= @sender %></p>
+
+
+<p>A Defesa ocorrerá no dia  <%= @project.board_date.to_s_br() %>, as <%= @project.boad_time.to_s(:time) %> horas. o local da defesas será <%= @project.board_location %>  </p>
+
+<p>Descrição do projeto <%= @project.description %></p>
+
+
+
+
+

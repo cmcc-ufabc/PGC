@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  project_id: 1
+  approval: MyString
+  mark: MyString
+  date: 2012-09-05
+  location: MyString
+  time: 2012-09-05 02:57:04
+
+two:
+  project_id: 1
+  approval: MyString
+  mark: MyString
+  date: 2012-09-05
+  location: MyString
+  time: 2012-09-05 02:57:04

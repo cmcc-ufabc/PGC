@@ -1,0 +1,34 @@
+<%= form_for(@notification) do |f| %>
+  <% if @notification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@notification.errors.count, "error") %> prohibited this notification from being saved:</h2>
+
+      <ul>
+      <% @notification.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :título %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :mensagem %><br />
+    <%= f.text_area :details %>
+  </div>
+  <div class="field">
+    
+    <%= f.hidden_field :author, :value =>current_user.name %>
+  </div>
+  <div class="field">
+    
+    <%= f.hidden_field :date, :value => 1.hour.from_now %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Enviar"%>
+  </div>
+<% end %>

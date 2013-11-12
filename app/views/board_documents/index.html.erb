@@ -1,0 +1,33 @@
+<h1>Listing board_documents</h1>
+
+<table>
+  <tr>
+    <th>Project</th>
+    <th>Approval</th>
+    <th>Mark</th>
+    <th>Date</th>
+    <th>Location</th>
+    <th>Time</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @board_documents.each do |board_document| %>
+  <tr>
+    <td><%= board_document.project_id %></td>
+    <td><%= board_document.approval %></td>
+    <td><%= board_document.mark %></td>
+    <td><%= board_document.date %></td>
+    <td><%= board_document.location %></td>
+    <td><%= board_document.time %></td>
+    <td><%= link_to 'Show', board_document %></td>
+    <td><%= link_to 'Edit', edit_board_document_path(board_document) %></td>
+    <td><%= link_to 'Destroy', board_document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Board document', new_board_document_path %>

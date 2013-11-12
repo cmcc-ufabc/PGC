@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="images/style.css" type="text/css" />
+  <title>Graduation</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag 'jquery', "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+
+
+<div id="templatemo_body_wrapper">
+<div id="templatemo_wrapper">
+
+	<div id="tempaltemo_header">
+    	<span id="header_icon"></span>
+    	<div id="header_content">
+        	<div id="site_title">
+				<h1>Sistema de gerenciamento de projetos de Graduação</h1>    </div>
+            <p>Sistema desenvolvido para auxiliar no processo de gerenciamento de projetos acadêmicos</p>
+		 
+		</div>
+    </div> <!-- end of header -->
+    
+    <div id="templatemo_main_top"></div>
+    <div id="templatemo_main"><span id="main_top"></span><span id="main_bottom"></span>
+    	
+        <div id="templatemo_sidebar">
+        
+        	<div id="templatemo_menu">
+        	<div id="templatemo_menu2">
+                <ul>
+                	
+                	<%if user_signed_in? %>
+
+
+						<%if current_user.role == "Aluno"%>
+	
+							
+							<li><%= link_to"Informações" , "/pgc/notifications" %> </li>				
+							<li><%= link_to"Pedido de Orientação" , "/pgc/projects/new" %> </li>
+							
+							<%if projeto_by_aluno(current_user.id) != {} %>
+								
+								
+								<%if existe_projeto_no_status(projeto_by_aluno(current_user.id), -3)%>
+								<li><%= link_to"Gerenciar Membros do Grupo" , members_path %> </li>
+								<%else%>
+								<li><h1>Gerenciar Membros do Grupo</h1> </li>
+								<%end%>
+								
+								<%if existe_projeto_maior_que_status(projeto_by_aluno(current_user.id), -99 )%>
+								<li><%= link_to"Meus Projetos" , "/pgc/projects" %> </li>
+								<%else%>
+								<li><h1>Meus Projetos</h1> </li>
+								<%end%>
+								
+								<%if existe_projeto_no_status(projeto_by_aluno(current_user.id), 5)%>
+								
+									<li><%= link_to"Enviar Relatório Final" , "/pgc/send" %> </li>
+								<%else%>
+								
+								<li><h1>Enviar Relatório Final</h1> </li>
+								<%end%>
+								
+							<%else%>
+							
+								
+							<li><h1>Meus Projetos</h1> </li>
+							<li><h1>Enviar Relatório Final</h1> </li>
+							
+							<%end%>
+							
+ 							<li><%= link_to"Sair" , destroy_user_session_path, :method => :delete %> </li>
+
+							
+ 						<%end%>
+ 		
+ 						<%if current_user.role == "Orientador"%>
+	
+							<li><%= link_to"Informações" , "/pgc/notifications" %> </li>
+							
+							<%if projeto_by_orientador(current_user.id) != {} %>
+							
+							<%if existe_projeto_no_status(projeto_by_orientador(current_user.id), 0)%>
+							<li><%= link_to "Analisar Pedidos de Orientação" , "/pgc/aceitar" %> </li>
+							<%else%>
+							<li><h1>Analisar Pedidos de Orientação</h1></li>
+							<%end%>
+							
+							<%if existe_projeto_no_status(projeto_by_orientador(current_user.id), 2) && Date.today >= data().evaluation_start%>
+							<li><%= link_to"Realizar Avaliaçao Parcial do Orientador" , "/pgc/avaliar" %> </li>
+							<%else%>
+							<li><h1>Realizar Avaliaçao Parcial do Orientador </h1></li>
+							<%end%>
+							
+							<%if existe_projeto_no_status(projeto_by_orientador(current_user.id), 3) && Date.today >= data().board_start %>
+							<li><%= link_to "Definir Banca" , "/pgc/banca" %> </li>
+							<%else%>
+							<li><h1>Definir Banca </h1></li>
+							<%end%>
+							
+							<%if existe_projeto_no_status(projeto_by_orientador(current_user.id), 4)%>
+							<li><%= link_to "Gerar Ata Final" , "/pgc/gerarata" %> </li>
+							<%else%>
+							<li><h1>Gerar Ata Final </h1></li>
+							<%end%>
+							
+							<li><%= link_to"Listar Projetos" , "/pgc/projects" %> </li>
+							
+							<%else%>
+							
+							<li><h1>Analisar Pedidos de Orientação</h1></li>
+							<li><h1>Avaliar Alunos </h1></li>
+							<li><h1>Definir Banca </h1></li>
+							<li><h1>Gerar Ata Final </h1></li>
+							<li><h1>Listar Projetos </h1></li>
+							<%end%>
+ 							
+ 							<li><%= link_to"Sair" , destroy_user_session_path, :method => :delete %> </li> 
+
+ 						<%end%>
+ 		
+ 						<%if current_user.role == "Coordenador"%>
+	
+	
+							<%if Project.all != {} %>
+								<li><%= link_to"Informações" , "/pgc/notifications" %> </li>
+							
+								<%if existe_projeto_no_status(Project.all, 1)%>
+									<li><%= link_to "Analisar Pedidos de Orientação" , "/pgc/aceitar" %> </li>	
+								<%else%>
+									<li><h1>Analisar Pedidos de Orientação</h1></li>
+								<%end%>
+								
+							
+								<li><%= link_to"Listar Projetos" , "/pgc/projects" %></li>
+								
+								<%if existe_projeto_no_status(Project.all, 5)%>
+									<li><%= link_to "Enviar ata digitalizada" , "/pgc/atamanual" %> </li>	
+								<%end%>
+								
+							<%else%>
+							
+								<li><h1>Analisar Pedidos de Orientação</h1></li>
+								<li><h1>Listar Projetos</h1></li> 
+							
+							<%end%>
+								
+						 	<li><%= link_to"Definir Datas" , duedates_path %> </li> 
+						 	<li><%= link_to"Gerar Relatório" , relatorio_projects_path %> </li> 
+ 							<li><%= link_to"Sair" , destroy_user_session_path, :method => :delete %> </li> 
+ 							
+
+ 						<%end%>
+ 	
+ 					<%else%>
+ 					
+ 						<li><%= link_to"Logar" , "/pgc/users/sign_in" %> </li>
+ 						<li><%= link_to"Cadastrar novo usuário" , "/pgc/users/sign_up" %> </li>
+ 					
+ 					
+ 					
+ 					<%end%>
+ 					
+ 					
+ 					<%if data() != nil%>
+ 					<li><h1>_______________</h1> </li>
+ 					<li><h1 style="color: #FF0000">Datas</h1> </li>
+ 					<h1 style="color: #000000">Pedido de Orientação <br /> <%= data().orientation_start.to_s_br%> até <%= data().orientation_end.to_s_br%> </h1> 
+ 					<h1 style="color: #000000">Avaliação processo de orientação <br /> <%= data().evaluation_start.to_s_br%> até <%= data().evaluation_end.to_s_br%></h1> <br />
+ 					<h1 style="color: #000000">Indicação da Banca <br /> <%= data().board_start.to_s_br%> até <%= data().board_end.to_s_br%></h1> 
+ 					<%end%>
+ 					
+                 
+            	</ul>    	
+            	</div>
+            </div> <!-- end of templatemo_menu -->
+        
+        	      
+            <div class="cleaner"></div>
+        </div> <!-- end of sidebar -->
+        
+        <div id="templatemo_content">
+        <%if user_signed_in?%>
+			 <p>Bem vindo <%= current_user.name%> - <%=current_user.role%>. </p>
+				<%end%>
+				 <div class="cleaner h30"></div>
+                
+          </div>
+        <div id="templatemo_content">
+        	
+            <div class="content_box">
+            	
+                <%= yield %>
+                
+              <div class="cleaner h30"></div>
+                
+          </div>
+            
+           
+        
+            <div class="content_box last_box">
+            	
+            </div>
+            
+        </div>
+        
+        <div class="cleaner"></div>    
+    </div>
+    
+    <div id="templatemo_main_bottom">
+    	
+    </div>
+
+</div> <!-- end of wrapper -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

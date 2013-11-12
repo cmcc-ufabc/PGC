@@ -1,0 +1,2 @@
+module BoardDocumentsHelper
+end

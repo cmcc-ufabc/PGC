@@ -1,0 +1,71 @@
+<h1>Listando todos os projetos</h1>
+
+<table>
+  <tr>
+    <th>Aluno</th>
+    <th>Orientador</th>
+    <th>Título</th>
+    
+    <th>Disciplina</th>
+    <th>Status</th>
+    <th>Avaliação parcial do orientador</th>
+    
+    <% if current_user.role == "Coordenador"%>
+  	<th>Atas Finais</th>
+  	<%end%>
+  	<th>Arquivo</th>
+  </tr>
+
+
+
+
+<% @projects.each do |project| %>
+  
+ 
+  <% if ( project.status > -1 || project.status < -3 || current_user.role =="Aluno")%>
+  <tr>
+    <td><%= retorna_nome(project.aluno_id) %></td>
+    <td><%= retorna_nome(project.orientador_id) %></td>
+    <td><%=  link_to project.title, project %></td>
+  
+    <td><%= project.course %></td>
+    <td><%= retorna_status(project.status) %></td>
+    <td> 
+    	<% if retorna_avaliacao(project.id) == 0%>
+    	Avaliação não realizada.
+    	<%else%>
+    	
+    	<%= link_to("Visualizar", evaluation_path(:id => retorna_avaliacao(project.id), :format => 'pdf'), :action => "new", :method => :get)%>
+    	
+    	<%end%>
+  
+	    <% if current_user.role == "Coordenador"%>
+  		<td>
+  			<% if retorna_ata(project.id) == 0%>
+    	Ata ainda não foi gerada.
+    	<%else%>
+    	
+    	
+    	
+    	<%if board_auto(project.id)%>
+    	<%= link_to("Visualizar", board_document_path(:id => retorna_ata(project.id), :format => 'pdf'), :method => :get)%>
+    	<%else%>
+    	<%= link_to("Abrir Arquivo", bdfile_projeto(project.id)) %>
+    	<%end%>
+    	<%end%>
+  		</td>
+     	<%end%>
+     	
+	
+     	<%if project.file.file?%>
+    		<td><%= link_to project.file.original_filename, project.file.url %></td>
+    	<% end%>
+  </tr>
+  
+<% end %>
+<% end %>
+</table>
+
+<br />
+
+

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+<p style="color: red">Um e-mail de confirmação foi enviado a esse membro, aguarde até a confirmaçao de todos os membros</p>
+<p>
+  <b>Nome:</b>
+  <%= @member.name %>
+</p>
+
+<p>
+  <b>E-mail:</b>
+  <%= @member.email %>
+</p>
+
+
+<%= link_to 'Voltar', manage_member_path(@member.project_id) %>

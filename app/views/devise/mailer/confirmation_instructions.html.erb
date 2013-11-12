@@ -1,0 +1,5 @@
+<p><%= @resource.name %>, Bem vindo ao sistema de PGC !</p>
+
+<p>Voce deve confirmar sua conta atraves do link abaixo:</p>
+
+<p><%= link_to 'Confirmar minha conta', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
